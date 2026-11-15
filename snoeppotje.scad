@@ -38,6 +38,18 @@ bodem = 1.6;
 // Kleine afschuining onderaan tegen "olifantenvoet"
 voet_afschuining = 0.6;
 
+/* [Naam] */
+// Naam die in de zijkant wordt uitgespaard (leeg laten = geen naam)
+naam = "Meike";
+// Lettertype
+lettertype = "Liberation Sans:style=Bold";
+// Maximale breedte van de naam (het vlakke deel van de zijkant is ca. 26 mm)
+naam_breedte = 24;
+// Hoe diep de letters in de wand gaan (laat minstens 1 mm wand over)
+naam_diepte = 0.6;
+// Hoogte van het midden van de naam, gemeten vanaf de onderkant
+naam_hoogte = 36;
+
 /* [Verborgen] */
 $fn = 96;
 
@@ -85,6 +97,13 @@ module potje() {
             laag(hoogte - inloop, 0.01, opening);
             laag(hoogte, 0.01, opening + 2 * inloop);
         }
+        // Naam in de voorkant
+        if (naam != "")
+            translate([0, -buiten / 2 + naam_diepte, naam_hoogte])
+                rotate([90, 0, 0])
+                    linear_extrude(naam_diepte + 1)
+                        resize([naam_breedte, 0], auto = true)
+                            text(naam, font = lettertype, halign = "center", valign = "center");
     }
 }
 

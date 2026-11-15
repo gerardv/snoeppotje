@@ -28,6 +28,12 @@ Open `snoeppotje.stl` in PrusaSlicer. Het potje staat al goed: opening naar bove
 - Onder de kraag wordt het potje binnenin wijder, met een schuine overgang van
   45 graden zodat het zonder support print.
 
+## Naam
+
+Op de voorkant is de naam "Meike" 0,6 mm diep uitgespaard, 24 mm breed. Daarachter
+blijft 1 mm wand over. Er is geen support nodig. Wil je een andere naam, of geen:
+pas `naam` aan (leeg laten = geen naam).
+
 ## Aanpassen
 
 `snoeppotje.scad` is het bronbestand voor [OpenSCAD](https://openscad.org) (gratis).
