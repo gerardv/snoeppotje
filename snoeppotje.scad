@@ -2,6 +2,10 @@
 // Een potje voor onder het oude bamboe dekseltje.
 // Alle maten in millimeters. Pas de waarden hieronder aan en exporteer
 // opnieuw naar STL (F6, daarna F7) als iets niet past.
+//
+// Afdichting: de siliconen ring steekt rondom 4 mm buiten het hout uit.
+// Bij het sluiten vouwt dat randje naar beneden, de opening in, en wordt
+// het tussen het hout en de binnenwand van de kraag geklemd.
 
 /* [Dekseltje (gemeten)] */
 // Breedte van het onderste houten deel dat in het potje zakt
@@ -10,18 +14,27 @@ plug_breedte = 49;
 plug_diagonaal = 60;
 // Buitenmaat van de siliconen ring
 ring_buitenmaat = 57;
+// Dikte van de siliconen ring
+ring_dikte = 1;
+
+/* [Afdichting] */
+// Hoeveel de ring wordt samengedrukt tussen hout en wand (per kant).
+// Groter = strakker en beter dicht, kleiner = makkelijker open.
+ring_klem = 0.2;
+// Diepte van de kraag waarin de ring afdicht
+kraag_hoogte = 10;
+// Afschuining bovenaan de opening, zodat de ring netjes naar binnen vouwt
+inloop = 1;
 
 /* [Potje] */
 // Totale hoogte van het potje (zonder deksel)
 hoogte = 80;
-// Wanddikte (1,6 mm = 4 lijnen met een 0,4 mm nozzle)
+// Buitenmaat van het potje
+buiten = 57;
+// Wanddikte onder de kraag (1,6 mm = 4 lijnen met een 0,4 mm nozzle)
 wand = 1.6;
 // Dikte van de bodem
 bodem = 1.6;
-// Speling rondom tussen hout en opening (per kant)
-speling = 0.3;
-// Hoogte van de kraag bovenin die het dekseltje recht houdt
-kraag_hoogte = 4;
 // Kleine afschuining onderaan tegen "olifantenvoet"
 voet_afschuining = 0.6;
 
@@ -31,21 +44,22 @@ $fn = 96;
 // Hoekstraal uit zijde en diagonaal:
 // diagonaal = z*sqrt(2) - 2r*(sqrt(2)-1)  =>  r = (z*sqrt(2) - d) / (2*(sqrt(2)-1))
 plug_straal = (plug_breedte * sqrt(2) - plug_diagonaal) / (2 * (sqrt(2) - 1));
+
+// Opening = hout + aan elke kant de (iets samengedrukte) ring
+opening = plug_breedte + 2 * (ring_dikte - ring_klem);
+binnen  = buiten - 2 * wand;
+kraag_afschuining = (binnen - opening) / 2; // 45 graden: print zonder support
+
 echo(str("Hoekstraal dekseltje: ", plug_straal, " mm"));
+echo(str("Opening bovenin: ", opening, " mm"));
 
 // Afgerond vierkant, gecentreerd, met zijde z en hoekstraal r
 module afgerond_vierkant(z, r) {
     offset(r = r) square(z - 2 * r, center = true);
 }
 
-// Alle vormen zijn concentrisch met het dekseltje, zodat de hoeken
-// overal netjes evenwijdig lopen.
+// Alle vormen zijn concentrisch met het dekseltje.
 function straal_bij(z) = plug_straal + (z - plug_breedte) / 2;
-
-buiten  = ring_buitenmaat;              // buitenkant potje = buitenkant ring
-binnen  = buiten - 2 * wand;            // binnenkant van de wand
-opening = plug_breedte + 2 * speling;   // opening bovenin
-kraag_afschuining = (binnen - opening) / 2; // 45 graden: print zonder support
 
 module laag(z, h, maat) {
     translate([0, 0, z]) linear_extrude(h) afgerond_vierkant(maat, straal_bij(maat));
@@ -66,6 +80,11 @@ module potje() {
             laag(hoogte - kraag_hoogte, 0.01, opening);
         }
         laag(hoogte - kraag_hoogte, kraag_hoogte + 1, opening);
+        // Inloop bovenaan
+        hull() {
+            laag(hoogte - inloop, 0.01, opening);
+            laag(hoogte, 0.01, opening + 2 * inloop);
+        }
     }
 }
 
