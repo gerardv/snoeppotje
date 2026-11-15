@@ -30,9 +30,11 @@ Open `snoeppotje.stl` in PrusaSlicer. Het potje staat al goed: opening naar bove
 
 ## Naam
 
-Op de voorkant is de naam "Meike" 0,6 mm diep uitgespaard, 24 mm breed. Daarachter
-blijft 1 mm wand over. Er is geen support nodig. Wil je een andere naam, of geen:
-pas `naam` aan (leeg laten = geen naam).
+Op de voorkant staat MEIKE in hoofdletters (Inter Display), 90 graden gedraaid
+zodat de naam van onder naar boven loopt, over 70 mm van de 80 mm hoogte.
+De letters zijn 0,6 mm diep uitgespaard; daarachter blijft 1 mm wand over.
+Er is geen support nodig. Een andere naam of geen naam: pas `naam` aan
+(leeg laten = geen naam).
 
 ## Aanpassen
 
