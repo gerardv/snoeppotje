@@ -31,7 +31,7 @@ inloop = 1;
 hoogte = 80;
 // Buitenmaat van het potje
 buiten = 57;
-// Wanddikte onder de kraag (1,6 mm = 4 lijnen met een 0,4 mm nozzle)
+// Wanddikte onder de kraag (1,6 mm = 4 lijnen met een 0,4 mm nozzle, perimeters 2 in PrusaSlicer)
 wand = 1.6;
 // Dikte van de bodem
 bodem = 1.6;

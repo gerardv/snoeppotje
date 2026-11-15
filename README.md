@@ -10,7 +10,8 @@ Open `snoeppotje.stl` in PrusaSlicer. Het potje staat al goed: opening naar bove
 
 - Materiaal: PLA
 - Laaghoogte: 0,2 mm
-- Perimeters: 4 (de wand is 1,6 mm, dan is hij helemaal massief)
+- Perimeters: 2 (standaard). PrusaSlicer telt per kant van de wand, dus dat zijn
+  samen 4 lijnen van ca. 0,4 mm: de wand van 1,6 mm is dan helemaal massief
 - Geen support nodig
 - Afmetingen: 57 x 57 x 80 mm, ongeveer 200 ml inhoud
 
