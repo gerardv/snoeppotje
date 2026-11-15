@@ -38,6 +38,18 @@ bodem = 1.6;
 // Kleine afschuining onderaan tegen "olifantenvoet"
 voet_afschuining = 0.6;
 
+/* [Naam] */
+// Naam die in de zijkant wordt uitgespaard (leeg laten = geen naam)
+naam = "MEIKE";
+// Lettertype
+lettertype = "Inter Display:style=SemiBold";
+// Extra ruimte tussen de letters (1 = normaal)
+letterafstand = 1.15;
+// Lengte van de naam; hij staat gedraaid en loopt van onder naar boven
+naam_lengte = 70;
+// Hoe diep de letters in de wand gaan (laat minstens 1 mm wand over)
+naam_diepte = 0.6;
+
 /* [Verborgen] */
 $fn = 96;
 
@@ -85,6 +97,15 @@ module potje() {
             laag(hoogte - inloop, 0.01, opening);
             laag(hoogte, 0.01, opening + 2 * inloop);
         }
+        // Naam in de voorkant, 90 graden gedraaid, leest van onder naar boven
+        if (naam != "")
+            translate([0, -buiten / 2 + naam_diepte, hoogte / 2])
+                rotate([90, 0, 0])
+                    linear_extrude(naam_diepte + 1)
+                        rotate(90)
+                            resize([naam_lengte, 0], auto = true)
+                                text(naam, font = lettertype, spacing = letterafstand,
+                                     halign = "center", valign = "center");
     }
 }
 

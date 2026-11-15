@@ -28,6 +28,14 @@ Open `snoeppotje.stl` in PrusaSlicer. Het potje staat al goed: opening naar bove
 - Onder de kraag wordt het potje binnenin wijder, met een schuine overgang van
   45 graden zodat het zonder support print.
 
+## Naam
+
+Op de voorkant staat MEIKE in hoofdletters (Inter Display), 90 graden gedraaid
+zodat de naam van onder naar boven loopt, over 70 mm van de 80 mm hoogte.
+De letters zijn 0,6 mm diep uitgespaard; daarachter blijft 1 mm wand over.
+Er is geen support nodig. Een andere naam of geen naam: pas `naam` aan
+(leeg laten = geen naam).
+
 ## Aanpassen
 
 `snoeppotje.scad` is het bronbestand voor [OpenSCAD](https://openscad.org) (gratis).
